@@ -14,7 +14,10 @@ import { Route as AnalyzeRouteImport } from './routes/analyze'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as TopSignalsRouteImport } from './routes/top-signals'
+import { Route as WatchlistRouteImport } from './routes/watchlist'
+import { Route as StockSymbolRouteImport } from './routes/stock.$symbol'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -41,9 +44,24 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TopSignalsRoute = TopSignalsRouteImport.update({
   id: '/top-signals',
   path: '/top-signals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WatchlistRoute = WatchlistRouteImport.update({
+  id: '/watchlist',
+  path: '/watchlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StockSymbolRoute = StockSymbolRouteImport.update({
+  id: '/stock/$symbol',
+  path: '/stock/$symbol',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -53,7 +71,10 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/settings': typeof SettingsRoute
   '/top-signals': typeof TopSignalsRoute
+  '/watchlist': typeof WatchlistRoute
+  '/stock/$symbol': typeof StockSymbolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,7 +82,10 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/settings': typeof SettingsRoute
   '/top-signals': typeof TopSignalsRoute
+  '/watchlist': typeof WatchlistRoute
+  '/stock/$symbol': typeof StockSymbolRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,14 +94,34 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/settings': typeof SettingsRoute
   '/top-signals': typeof TopSignalsRoute
+  '/watchlist': typeof WatchlistRoute
+  '/stock/$symbol': typeof StockSymbolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/analyze' | '/dashboard' | '/login' | '/register' | '/top-signals'
+    | '/'
+    | '/analyze'
+    | '/dashboard'
+    | '/login'
+    | '/register'
+    | '/settings'
+    | '/top-signals'
+    | '/watchlist'
+    | '/stock/$symbol'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analyze' | '/dashboard' | '/login' | '/register' | '/top-signals'
+  to:
+    | '/'
+    | '/analyze'
+    | '/dashboard'
+    | '/login'
+    | '/register'
+    | '/settings'
+    | '/top-signals'
+    | '/watchlist'
+    | '/stock/$symbol'
   id:
     | '__root__'
     | '/'
@@ -85,7 +129,10 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/login'
     | '/register'
+    | '/settings'
     | '/top-signals'
+    | '/watchlist'
+    | '/stock/$symbol'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,7 +141,10 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
+  SettingsRoute: typeof SettingsRoute
   TopSignalsRoute: typeof TopSignalsRoute
+  WatchlistRoute: typeof WatchlistRoute
+  StockSymbolRoute: typeof StockSymbolRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -134,11 +184,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/top-signals': {
       id: '/top-signals'
       path: '/top-signals'
       fullPath: '/top-signals'
       preLoaderRoute: typeof TopSignalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/watchlist': {
+      id: '/watchlist'
+      path: '/watchlist'
+      fullPath: '/watchlist'
+      preLoaderRoute: typeof WatchlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stock/$symbol': {
+      id: '/stock/$symbol'
+      path: '/stock/$symbol'
+      fullPath: '/stock/$symbol'
+      preLoaderRoute: typeof StockSymbolRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -150,7 +221,10 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
+  SettingsRoute: SettingsRoute,
   TopSignalsRoute: TopSignalsRoute,
+  WatchlistRoute: WatchlistRoute,
+  StockSymbolRoute: StockSymbolRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
